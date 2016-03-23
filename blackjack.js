@@ -6,11 +6,11 @@ function runGame() {
 
     function hit() {
         var card = Math.floor(Math.random() * cards.length);
-        display.innerHTML = display.innerHTML + ' ' + cards[card];
-        checkResult(false, true);
+        randomCard();
+        checkResult(false);
     }
 
-    function checkResult(standing, hitting) {
+    function checkResult(standing) {
        var deal = display.innerHTML.split(' ');
 
 
@@ -43,7 +43,7 @@ function runGame() {
             start();
         }
 
-        else if ((cardValue > 18 && hitting) || cardValue === 21) {
+        else if ((cardValue > 18 && standing) || cardValue === 21) {
             alert('You win!');
             start();
         }
@@ -52,15 +52,16 @@ function runGame() {
     }
 
     document.getElementById('stand').addEventListener('click',function(){ 
-        checkResult(true, false); 
+        checkResult(true); 
     });
-    function start (){
-        function randomCard(){
-        card = Math.floor(Math.random() * cards.length);
-        display.innerHTML = cards[card];
-    }
+    function randomCard(){
         card = Math.floor(Math.random() * cards.length);
         display.innerHTML = display.innerHTML + ' ' + cards[card];
+    }
+    function start (){
+        display.innerHTML = '';
+        randomCard();
+        randomCard();
 
     checkResult();
 }
